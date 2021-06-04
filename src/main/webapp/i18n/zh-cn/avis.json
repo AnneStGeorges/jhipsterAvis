@@ -1,0 +1,28 @@
+{
+  "jhipsterAvisApp": {
+    "avis": {
+      "home": {
+        "title": "Avis",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Avis",
+        "createOrEditLabel": "创建或编辑 Avis",
+        "notFound": "No Avis found"
+      },
+      "created": "Avis {{ param }} 创建成功",
+      "updated": "Avis {{ param }} 更新成功",
+      "deleted": "Avis {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Avis {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Avis"
+      },
+      "id": "Id",
+      "note": "Note",
+      "description": "Description",
+      "dateEnvoi": "Date Envoi",
+      "joueur": "Joueur",
+      "jeu": "Jeu"
+    }
+  }
+}

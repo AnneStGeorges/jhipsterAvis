@@ -1,0 +1,28 @@
+{
+  "jhipsterAvisApp": {
+    "joueur": {
+      "home": {
+        "title": "Joueurs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Joueur",
+        "createOrEditLabel": "创建或编辑 Joueur",
+        "notFound": "No Joueurs found"
+      },
+      "created": "Joueur {{ param }} 创建成功",
+      "updated": "Joueur {{ param }} 更新成功",
+      "deleted": "Joueur {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Joueur {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Joueur"
+      },
+      "id": "Id",
+      "pseudo": "Pseudo",
+      "motDePasse": "Mot De Passe",
+      "dateInscription": "Date Inscription",
+      "estAdministrateur": "Est Administrateur",
+      "avis": "Avis"
+    }
+  }
+}

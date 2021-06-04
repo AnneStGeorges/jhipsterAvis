@@ -42,7 +42,9 @@
     "jwtSecretKey": "YmQ3MjJmYTA3YTY4YzYzMWJiOTc5ZWIxZDgyMGM4MmFiNmRlNmM1YmExZjQwNmNmZDJjZjU0ZjM1MzljNjljMzYwYWUzMzc2M2RkZWZlMDRmOGIzYzZhMmQzNzg4MTQ0MGE3MjQ4YTFhN2YwYzJiNzUyM2JhN2RhMjA5ZDIzNWY=",
     "clientTheme": "none",
     "clientThemeVariant": "",
-    "reactive": false
+    "reactive": false,
+    "entities": ["Jeu", "Editeur", "Avis", "Joueur"],
+    "lastLiquibaseTimestamp": 1622809898000
   },
   "git-provider": "GitHub",
   "git-company": "AnneStGeorges",
