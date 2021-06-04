@@ -3,6 +3,8 @@ package fr.hb.avis.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -33,9 +35,10 @@ public class Joueur implements Serializable {
     @Column(name = "est_administrateur")
     private Boolean estAdministrateur;
 
-    @ManyToOne
-    @JsonIgnoreProperties(value = { "joueurs", "jeus" }, allowSetters = true)
-    private Avis avis;
+    @OneToMany(mappedBy = "joueur")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "joueur", "jeu" }, allowSetters = true)
+    private Set<Avis> avis = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -103,16 +106,34 @@ public class Joueur implements Serializable {
         this.estAdministrateur = estAdministrateur;
     }
 
-    public Avis getAvis() {
+    public Set<Avis> getAvis() {
         return this.avis;
     }
 
-    public Joueur avis(Avis avis) {
+    public Joueur avis(Set<Avis> avis) {
         this.setAvis(avis);
         return this;
     }
 
-    public void setAvis(Avis avis) {
+    public Joueur addAvis(Avis avis) {
+        this.avis.add(avis);
+        avis.setJoueur(this);
+        return this;
+    }
+
+    public Joueur removeAvis(Avis avis) {
+        this.avis.remove(avis);
+        avis.setJoueur(null);
+        return this;
+    }
+
+    public void setAvis(Set<Avis> avis) {
+        if (this.avis != null) {
+            this.avis.forEach(i -> i.setJoueur(null));
+        }
+        if (avis != null) {
+            avis.forEach(i -> i.setJoueur(this));
+        }
         this.avis = avis;
     }
 

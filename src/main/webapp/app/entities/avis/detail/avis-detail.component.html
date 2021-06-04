@@ -26,6 +26,18 @@
         <dd>
           <span>{{ avis.dateEnvoi | formatMediumDatetime }}</span>
         </dd>
+        <dt><span jhiTranslate="jhipsterAvisApp.avis.joueur">Joueur</span></dt>
+        <dd>
+          <div *ngIf="avis.joueur">
+            <a [routerLink]="['/joueur', avis.joueur?.id, 'view']">{{ avis.joueur?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="jhipsterAvisApp.avis.jeu">Jeu</span></dt>
+        <dd>
+          <div *ngIf="avis.jeu">
+            <a [routerLink]="['/jeu', avis.jeu?.id, 'view']">{{ avis.jeu?.id }}</a>
+          </div>
+        </dd>
       </dl>
 
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">

@@ -46,14 +46,14 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" jhiTranslate="jhipsterAvisApp.jeu.avis" for="field_avis">Avis</label>
-          <select class="form-control" id="field_avis" data-cy="avis" name="avis" formControlName="avis">
+          <label class="form-control-label" jhiTranslate="jhipsterAvisApp.jeu.editeur" for="field_editeur">Editeur</label>
+          <select class="form-control" id="field_editeur" data-cy="editeur" name="editeur" formControlName="editeur">
             <option [ngValue]="null"></option>
             <option
-              [ngValue]="avisOption.id === editForm.get('avis')!.value?.id ? editForm.get('avis')!.value : avisOption"
-              *ngFor="let avisOption of avisSharedCollection; trackBy: trackAvisById"
+              [ngValue]="editeurOption.id === editForm.get('editeur')!.value?.id ? editForm.get('editeur')!.value : editeurOption"
+              *ngFor="let editeurOption of editeursSharedCollection; trackBy: trackEditeurById"
             >
-              {{ avisOption.id }}
+              {{ editeurOption.id }}
             </option>
           </select>
         </div>

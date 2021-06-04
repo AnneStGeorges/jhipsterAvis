@@ -7,7 +7,7 @@ export interface IJoueur {
   motDePasse?: string | null;
   dateInscription?: dayjs.Dayjs | null;
   estAdministrateur?: boolean | null;
-  avis?: IAvis | null;
+  avis?: IAvis[] | null;
 }
 
 export class Joueur implements IJoueur {
@@ -17,7 +17,7 @@ export class Joueur implements IJoueur {
     public motDePasse?: string | null,
     public dateInscription?: dayjs.Dayjs | null,
     public estAdministrateur?: boolean | null,
-    public avis?: IAvis | null
+    public avis?: IAvis[] | null
   ) {
     this.estAdministrateur = this.estAdministrateur ?? false;
   }

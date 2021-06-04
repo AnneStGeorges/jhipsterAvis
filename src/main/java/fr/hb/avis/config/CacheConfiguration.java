@@ -55,6 +55,9 @@ public class CacheConfiguration {
             createCache(cm, fr.hb.avis.domain.Avis.class.getName() + ".joueurs");
             createCache(cm, fr.hb.avis.domain.Avis.class.getName() + ".jeus");
             createCache(cm, fr.hb.avis.domain.Joueur.class.getName());
+            createCache(cm, fr.hb.avis.domain.Jeu.class.getName() + ".avis");
+            createCache(cm, fr.hb.avis.domain.Editeur.class.getName() + ".jeus");
+            createCache(cm, fr.hb.avis.domain.Joueur.class.getName() + ".avis");
             // jhipster-needle-ehcache-add-entry
         };
     }

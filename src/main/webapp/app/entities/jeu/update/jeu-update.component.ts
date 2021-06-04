@@ -10,8 +10,8 @@ import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 
 import { IJeu, Jeu } from '../jeu.model';
 import { JeuService } from '../service/jeu.service';
-import { IAvis } from 'app/entities/avis/avis.model';
-import { AvisService } from 'app/entities/avis/service/avis.service';
+import { IEditeur } from 'app/entities/editeur/editeur.model';
+import { EditeurService } from 'app/entities/editeur/service/editeur.service';
 
 @Component({
   selector: 'jhi-jeu-update',
@@ -20,19 +20,19 @@ import { AvisService } from 'app/entities/avis/service/avis.service';
 export class JeuUpdateComponent implements OnInit {
   isSaving = false;
 
-  avisSharedCollection: IAvis[] = [];
+  editeursSharedCollection: IEditeur[] = [];
 
   editForm = this.fb.group({
     id: [],
     nom: [],
     description: [],
     dateSortie: [],
-    avis: [],
+    editeur: [],
   });
 
   constructor(
     protected jeuService: JeuService,
-    protected avisService: AvisService,
+    protected editeurService: EditeurService,
     protected activatedRoute: ActivatedRoute,
     protected fb: FormBuilder
   ) {}
@@ -64,7 +64,7 @@ export class JeuUpdateComponent implements OnInit {
     }
   }
 
-  trackAvisById(index: number, item: IAvis): number {
+  trackEditeurById(index: number, item: IEditeur): number {
     return item.id!;
   }
 
@@ -93,18 +93,20 @@ export class JeuUpdateComponent implements OnInit {
       nom: jeu.nom,
       description: jeu.description,
       dateSortie: jeu.dateSortie ? jeu.dateSortie.format(DATE_TIME_FORMAT) : null,
-      avis: jeu.avis,
+      editeur: jeu.editeur,
     });
 
-    this.avisSharedCollection = this.avisService.addAvisToCollectionIfMissing(this.avisSharedCollection, jeu.avis);
+    this.editeursSharedCollection = this.editeurService.addEditeurToCollectionIfMissing(this.editeursSharedCollection, jeu.editeur);
   }
 
   protected loadRelationshipsOptions(): void {
-    this.avisService
+    this.editeurService
       .query()
-      .pipe(map((res: HttpResponse<IAvis[]>) => res.body ?? []))
-      .pipe(map((avis: IAvis[]) => this.avisService.addAvisToCollectionIfMissing(avis, this.editForm.get('avis')!.value)))
-      .subscribe((avis: IAvis[]) => (this.avisSharedCollection = avis));
+      .pipe(map((res: HttpResponse<IEditeur[]>) => res.body ?? []))
+      .pipe(
+        map((editeurs: IEditeur[]) => this.editeurService.addEditeurToCollectionIfMissing(editeurs, this.editForm.get('editeur')!.value))
+      )
+      .subscribe((editeurs: IEditeur[]) => (this.editeursSharedCollection = editeurs));
   }
 
   protected createFromForm(): IJeu {
@@ -114,7 +116,7 @@ export class JeuUpdateComponent implements OnInit {
       nom: this.editForm.get(['nom'])!.value,
       description: this.editForm.get(['description'])!.value,
       dateSortie: this.editForm.get(['dateSortie'])!.value ? dayjs(this.editForm.get(['dateSortie'])!.value, DATE_TIME_FORMAT) : undefined,
-      avis: this.editForm.get(['avis'])!.value,
+      editeur: this.editForm.get(['editeur'])!.value,
     };
   }
 }

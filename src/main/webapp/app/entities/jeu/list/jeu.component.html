@@ -36,7 +36,7 @@
           <th scope="col"><span jhiTranslate="jhipsterAvisApp.jeu.nom">Nom</span></th>
           <th scope="col"><span jhiTranslate="jhipsterAvisApp.jeu.description">Description</span></th>
           <th scope="col"><span jhiTranslate="jhipsterAvisApp.jeu.dateSortie">Date Sortie</span></th>
-          <th scope="col"><span jhiTranslate="jhipsterAvisApp.jeu.avis">Avis</span></th>
+          <th scope="col"><span jhiTranslate="jhipsterAvisApp.jeu.editeur">Editeur</span></th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -49,8 +49,8 @@
           <td>{{ jeu.description }}</td>
           <td>{{ jeu.dateSortie | formatMediumDatetime }}</td>
           <td>
-            <div *ngIf="jeu.avis">
-              <a [routerLink]="['/avis', jeu.avis?.id, 'view']">{{ jeu.avis?.id }}</a>
+            <div *ngIf="jeu.editeur">
+              <a [routerLink]="['/editeur', jeu.editeur?.id, 'view']">{{ jeu.editeur?.id }}</a>
             </div>
           </td>
           <td class="text-right">

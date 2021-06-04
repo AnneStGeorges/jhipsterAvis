@@ -34,7 +34,6 @@
         <tr>
           <th scope="col"><span jhiTranslate="jhipsterAvisApp.editeur.id">Id</span></th>
           <th scope="col"><span jhiTranslate="jhipsterAvisApp.editeur.nom">Nom</span></th>
-          <th scope="col"><span jhiTranslate="jhipsterAvisApp.editeur.jeu">Jeu</span></th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -44,11 +43,6 @@
             <a [routerLink]="['/editeur', editeur.id, 'view']">{{ editeur.id }}</a>
           </td>
           <td>{{ editeur.nom }}</td>
-          <td>
-            <div *ngIf="editeur.jeu">
-              <a [routerLink]="['/jeu', editeur.jeu?.id, 'view']">{{ editeur.jeu?.id }}</a>
-            </div>
-          </td>
           <td class="text-right">
             <div class="btn-group">
               <button

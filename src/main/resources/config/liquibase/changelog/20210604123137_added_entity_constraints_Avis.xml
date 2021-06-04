@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity Avis.
+    -->
+    <changeSet id="20210604123137-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="joueur_id"
+                                 baseTableName="avis"
+                                 constraintName="fk_avis__joueur_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="joueur"/>
+
+        <addForeignKeyConstraint baseColumnNames="jeu_id"
+                                 baseTableName="avis"
+                                 constraintName="fk_avis__jeu_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jeu"/>
+    </changeSet>
+</databaseChangeLog>

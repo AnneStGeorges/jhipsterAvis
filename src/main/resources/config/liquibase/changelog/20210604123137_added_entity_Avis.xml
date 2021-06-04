@@ -23,6 +23,12 @@
             <column name="date_envoi" type="${datetimeType}">
                 <constraints nullable="true" />
             </column>
+            <column name="joueur_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <column name="jeu_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
         <dropDefaultValue tableName="avis" columnName="date_envoi" columnDataType="${datetimeType}"/>

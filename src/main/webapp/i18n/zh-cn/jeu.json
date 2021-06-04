@@ -21,8 +21,8 @@
       "nom": "Nom",
       "description": "Description",
       "dateSortie": "Date Sortie",
-      "editeur": "Editeur",
-      "avis": "Avis"
+      "avis": "Avis",
+      "editeur": "Editeur"
     }
   }
 }

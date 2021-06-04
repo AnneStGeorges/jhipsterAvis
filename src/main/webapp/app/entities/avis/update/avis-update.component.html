@@ -44,6 +44,32 @@
             />
           </div>
         </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jhipsterAvisApp.avis.joueur" for="field_joueur">Joueur</label>
+          <select class="form-control" id="field_joueur" data-cy="joueur" name="joueur" formControlName="joueur">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="joueurOption.id === editForm.get('joueur')!.value?.id ? editForm.get('joueur')!.value : joueurOption"
+              *ngFor="let joueurOption of joueursSharedCollection; trackBy: trackJoueurById"
+            >
+              {{ joueurOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jhipsterAvisApp.avis.jeu" for="field_jeu">Jeu</label>
+          <select class="form-control" id="field_jeu" data-cy="jeu" name="jeu" formControlName="jeu">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="jeuOption.id === editForm.get('jeu')!.value?.id ? editForm.get('jeu')!.value : jeuOption"
+              *ngFor="let jeuOption of jeusSharedCollection; trackBy: trackJeuById"
+            >
+              {{ jeuOption.id }}
+            </option>
+          </select>
+        </div>
       </div>
 
       <div>

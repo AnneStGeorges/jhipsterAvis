@@ -26,9 +26,6 @@
             <column name="est_administrateur" type="boolean">
                 <constraints nullable="true" />
             </column>
-            <column name="avis_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
         <dropDefaultValue tableName="joueur" columnName="date_inscription" columnDataType="${datetimeType}"/>

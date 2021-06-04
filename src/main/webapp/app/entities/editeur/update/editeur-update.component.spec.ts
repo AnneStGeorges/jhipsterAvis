@@ -9,8 +9,6 @@ import { of, Subject } from 'rxjs';
 
 import { EditeurService } from '../service/editeur.service';
 import { IEditeur, Editeur } from '../editeur.model';
-import { IJeu } from 'app/entities/jeu/jeu.model';
-import { JeuService } from 'app/entities/jeu/service/jeu.service';
 
 import { EditeurUpdateComponent } from './editeur-update.component';
 
@@ -20,7 +18,6 @@ describe('Component Tests', () => {
     let fixture: ComponentFixture<EditeurUpdateComponent>;
     let activatedRoute: ActivatedRoute;
     let editeurService: EditeurService;
-    let jeuService: JeuService;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
@@ -34,41 +31,18 @@ describe('Component Tests', () => {
       fixture = TestBed.createComponent(EditeurUpdateComponent);
       activatedRoute = TestBed.inject(ActivatedRoute);
       editeurService = TestBed.inject(EditeurService);
-      jeuService = TestBed.inject(JeuService);
 
       comp = fixture.componentInstance;
     });
 
     describe('ngOnInit', () => {
-      it('Should call Jeu query and add missing value', () => {
-        const editeur: IEditeur = { id: 456 };
-        const jeu: IJeu = { id: 73746 };
-        editeur.jeu = jeu;
-
-        const jeuCollection: IJeu[] = [{ id: 6220 }];
-        spyOn(jeuService, 'query').and.returnValue(of(new HttpResponse({ body: jeuCollection })));
-        const additionalJeus = [jeu];
-        const expectedCollection: IJeu[] = [...additionalJeus, ...jeuCollection];
-        spyOn(jeuService, 'addJeuToCollectionIfMissing').and.returnValue(expectedCollection);
-
-        activatedRoute.data = of({ editeur });
-        comp.ngOnInit();
-
-        expect(jeuService.query).toHaveBeenCalled();
-        expect(jeuService.addJeuToCollectionIfMissing).toHaveBeenCalledWith(jeuCollection, ...additionalJeus);
-        expect(comp.jeusSharedCollection).toEqual(expectedCollection);
-      });
-
       it('Should update editForm', () => {
         const editeur: IEditeur = { id: 456 };
-        const jeu: IJeu = { id: 4146 };
-        editeur.jeu = jeu;
 
         activatedRoute.data = of({ editeur });
         comp.ngOnInit();
 
         expect(comp.editForm.value).toEqual(expect.objectContaining(editeur));
-        expect(comp.jeusSharedCollection).toContain(jeu);
       });
     });
 
@@ -133,16 +107,6 @@ describe('Component Tests', () => {
         expect(editeurService.update).toHaveBeenCalledWith(editeur);
         expect(comp.isSaving).toEqual(false);
         expect(comp.previousState).not.toHaveBeenCalled();
-      });
-    });
-
-    describe('Tracking relationships identifiers', () => {
-      describe('trackJeuById', () => {
-        it('Should return tracked Jeu primary key', () => {
-          const entity = { id: 123 };
-          const trackResult = comp.trackJeuById(0, entity);
-          expect(trackResult).toEqual(entity.id);
-        });
       });
     });
   });
