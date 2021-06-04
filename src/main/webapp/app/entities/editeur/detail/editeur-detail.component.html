@@ -18,12 +18,6 @@
         <dd>
           <span>{{ editeur.nom }}</span>
         </dd>
-        <dt><span jhiTranslate="jhipsterAvisApp.editeur.jeu">Jeu</span></dt>
-        <dd>
-          <div *ngIf="editeur.jeu">
-            <a [routerLink]="['/jeu', editeur.jeu?.id, 'view']">{{ editeur.jeu?.id }}</a>
-          </div>
-        </dd>
       </dl>
 
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">

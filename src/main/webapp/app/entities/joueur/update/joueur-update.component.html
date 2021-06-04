@@ -60,19 +60,6 @@
             formControlName="estAdministrateur"
           />
         </div>
-
-        <div class="form-group">
-          <label class="form-control-label" jhiTranslate="jhipsterAvisApp.joueur.avis" for="field_avis">Avis</label>
-          <select class="form-control" id="field_avis" data-cy="avis" name="avis" formControlName="avis">
-            <option [ngValue]="null"></option>
-            <option
-              [ngValue]="avisOption.id === editForm.get('avis')!.value?.id ? editForm.get('avis')!.value : avisOption"
-              *ngFor="let avisOption of avisSharedCollection; trackBy: trackAvisById"
-            >
-              {{ avisOption.id }}
-            </option>
-          </select>
-        </div>
       </div>
 
       <div>

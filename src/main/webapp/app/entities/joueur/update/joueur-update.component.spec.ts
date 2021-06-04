@@ -9,8 +9,6 @@ import { of, Subject } from 'rxjs';
 
 import { JoueurService } from '../service/joueur.service';
 import { IJoueur, Joueur } from '../joueur.model';
-import { IAvis } from 'app/entities/avis/avis.model';
-import { AvisService } from 'app/entities/avis/service/avis.service';
 
 import { JoueurUpdateComponent } from './joueur-update.component';
 
@@ -20,7 +18,6 @@ describe('Component Tests', () => {
     let fixture: ComponentFixture<JoueurUpdateComponent>;
     let activatedRoute: ActivatedRoute;
     let joueurService: JoueurService;
-    let avisService: AvisService;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
@@ -34,41 +31,18 @@ describe('Component Tests', () => {
       fixture = TestBed.createComponent(JoueurUpdateComponent);
       activatedRoute = TestBed.inject(ActivatedRoute);
       joueurService = TestBed.inject(JoueurService);
-      avisService = TestBed.inject(AvisService);
 
       comp = fixture.componentInstance;
     });
 
     describe('ngOnInit', () => {
-      it('Should call Avis query and add missing value', () => {
-        const joueur: IJoueur = { id: 456 };
-        const avis: IAvis = { id: 8874 };
-        joueur.avis = avis;
-
-        const avisCollection: IAvis[] = [{ id: 34816 }];
-        spyOn(avisService, 'query').and.returnValue(of(new HttpResponse({ body: avisCollection })));
-        const additionalAvis = [avis];
-        const expectedCollection: IAvis[] = [...additionalAvis, ...avisCollection];
-        spyOn(avisService, 'addAvisToCollectionIfMissing').and.returnValue(expectedCollection);
-
-        activatedRoute.data = of({ joueur });
-        comp.ngOnInit();
-
-        expect(avisService.query).toHaveBeenCalled();
-        expect(avisService.addAvisToCollectionIfMissing).toHaveBeenCalledWith(avisCollection, ...additionalAvis);
-        expect(comp.avisSharedCollection).toEqual(expectedCollection);
-      });
-
       it('Should update editForm', () => {
         const joueur: IJoueur = { id: 456 };
-        const avis: IAvis = { id: 38917 };
-        joueur.avis = avis;
 
         activatedRoute.data = of({ joueur });
         comp.ngOnInit();
 
         expect(comp.editForm.value).toEqual(expect.objectContaining(joueur));
-        expect(comp.avisSharedCollection).toContain(avis);
       });
     });
 
@@ -133,16 +107,6 @@ describe('Component Tests', () => {
         expect(joueurService.update).toHaveBeenCalledWith(joueur);
         expect(comp.isSaving).toEqual(false);
         expect(comp.previousState).not.toHaveBeenCalled();
-      });
-    });
-
-    describe('Tracking relationships identifiers', () => {
-      describe('trackAvisById', () => {
-        it('Should return tracked Avis primary key', () => {
-          const entity = { id: 123 };
-          const trackResult = comp.trackAvisById(0, entity);
-          expect(trackResult).toEqual(entity.id);
-        });
       });
     });
   });

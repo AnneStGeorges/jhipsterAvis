@@ -34,12 +34,12 @@ public class Jeu implements Serializable {
 
     @OneToMany(mappedBy = "jeu")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "jeu" }, allowSetters = true)
-    private Set<Editeur> editeurs = new HashSet<>();
+    @JsonIgnoreProperties(value = { "joueur", "jeu" }, allowSetters = true)
+    private Set<Avis> avis = new HashSet<>();
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "joueurs", "jeus" }, allowSetters = true)
-    private Avis avis;
+    @JsonIgnoreProperties(value = { "jeus" }, allowSetters = true)
+    private Editeur editeur;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -94,48 +94,48 @@ public class Jeu implements Serializable {
         this.dateSortie = dateSortie;
     }
 
-    public Set<Editeur> getEditeurs() {
-        return this.editeurs;
-    }
-
-    public Jeu editeurs(Set<Editeur> editeurs) {
-        this.setEditeurs(editeurs);
-        return this;
-    }
-
-    public Jeu addEditeur(Editeur editeur) {
-        this.editeurs.add(editeur);
-        editeur.setJeu(this);
-        return this;
-    }
-
-    public Jeu removeEditeur(Editeur editeur) {
-        this.editeurs.remove(editeur);
-        editeur.setJeu(null);
-        return this;
-    }
-
-    public void setEditeurs(Set<Editeur> editeurs) {
-        if (this.editeurs != null) {
-            this.editeurs.forEach(i -> i.setJeu(null));
-        }
-        if (editeurs != null) {
-            editeurs.forEach(i -> i.setJeu(this));
-        }
-        this.editeurs = editeurs;
-    }
-
-    public Avis getAvis() {
+    public Set<Avis> getAvis() {
         return this.avis;
     }
 
-    public Jeu avis(Avis avis) {
+    public Jeu avis(Set<Avis> avis) {
         this.setAvis(avis);
         return this;
     }
 
-    public void setAvis(Avis avis) {
+    public Jeu addAvis(Avis avis) {
+        this.avis.add(avis);
+        avis.setJeu(this);
+        return this;
+    }
+
+    public Jeu removeAvis(Avis avis) {
+        this.avis.remove(avis);
+        avis.setJeu(null);
+        return this;
+    }
+
+    public void setAvis(Set<Avis> avis) {
+        if (this.avis != null) {
+            this.avis.forEach(i -> i.setJeu(null));
+        }
+        if (avis != null) {
+            avis.forEach(i -> i.setJeu(this));
+        }
         this.avis = avis;
+    }
+
+    public Editeur getEditeur() {
+        return this.editeur;
+    }
+
+    public Jeu editeur(Editeur editeur) {
+        this.setEditeur(editeur);
+        return this;
+    }
+
+    public void setEditeur(Editeur editeur) {
+        this.editeur = editeur;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

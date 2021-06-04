@@ -21,15 +21,15 @@
   "relationships": [
     {
       "relationshipType": "one-to-many",
-      "otherEntityName": "editeur",
-      "otherEntityRelationshipName": "jeu",
-      "relationshipName": "editeur"
-    },
-    {
-      "relationshipType": "many-to-one",
       "otherEntityName": "avis",
       "otherEntityRelationshipName": "jeu",
       "relationshipName": "avis"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "editeur",
+      "otherEntityRelationshipName": "jeu",
+      "relationshipName": "editeur"
     }
   ],
   "entityTableName": "jeu",

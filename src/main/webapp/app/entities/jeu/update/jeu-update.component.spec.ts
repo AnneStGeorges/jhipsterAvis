@@ -9,8 +9,8 @@ import { of, Subject } from 'rxjs';
 
 import { JeuService } from '../service/jeu.service';
 import { IJeu, Jeu } from '../jeu.model';
-import { IAvis } from 'app/entities/avis/avis.model';
-import { AvisService } from 'app/entities/avis/service/avis.service';
+import { IEditeur } from 'app/entities/editeur/editeur.model';
+import { EditeurService } from 'app/entities/editeur/service/editeur.service';
 
 import { JeuUpdateComponent } from './jeu-update.component';
 
@@ -20,7 +20,7 @@ describe('Component Tests', () => {
     let fixture: ComponentFixture<JeuUpdateComponent>;
     let activatedRoute: ActivatedRoute;
     let jeuService: JeuService;
-    let avisService: AvisService;
+    let editeurService: EditeurService;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
@@ -34,41 +34,41 @@ describe('Component Tests', () => {
       fixture = TestBed.createComponent(JeuUpdateComponent);
       activatedRoute = TestBed.inject(ActivatedRoute);
       jeuService = TestBed.inject(JeuService);
-      avisService = TestBed.inject(AvisService);
+      editeurService = TestBed.inject(EditeurService);
 
       comp = fixture.componentInstance;
     });
 
     describe('ngOnInit', () => {
-      it('Should call Avis query and add missing value', () => {
+      it('Should call Editeur query and add missing value', () => {
         const jeu: IJeu = { id: 456 };
-        const avis: IAvis = { id: 69990 };
-        jeu.avis = avis;
+        const editeur: IEditeur = { id: 65602 };
+        jeu.editeur = editeur;
 
-        const avisCollection: IAvis[] = [{ id: 48274 }];
-        spyOn(avisService, 'query').and.returnValue(of(new HttpResponse({ body: avisCollection })));
-        const additionalAvis = [avis];
-        const expectedCollection: IAvis[] = [...additionalAvis, ...avisCollection];
-        spyOn(avisService, 'addAvisToCollectionIfMissing').and.returnValue(expectedCollection);
+        const editeurCollection: IEditeur[] = [{ id: 77374 }];
+        spyOn(editeurService, 'query').and.returnValue(of(new HttpResponse({ body: editeurCollection })));
+        const additionalEditeurs = [editeur];
+        const expectedCollection: IEditeur[] = [...additionalEditeurs, ...editeurCollection];
+        spyOn(editeurService, 'addEditeurToCollectionIfMissing').and.returnValue(expectedCollection);
 
         activatedRoute.data = of({ jeu });
         comp.ngOnInit();
 
-        expect(avisService.query).toHaveBeenCalled();
-        expect(avisService.addAvisToCollectionIfMissing).toHaveBeenCalledWith(avisCollection, ...additionalAvis);
-        expect(comp.avisSharedCollection).toEqual(expectedCollection);
+        expect(editeurService.query).toHaveBeenCalled();
+        expect(editeurService.addEditeurToCollectionIfMissing).toHaveBeenCalledWith(editeurCollection, ...additionalEditeurs);
+        expect(comp.editeursSharedCollection).toEqual(expectedCollection);
       });
 
       it('Should update editForm', () => {
         const jeu: IJeu = { id: 456 };
-        const avis: IAvis = { id: 7835 };
-        jeu.avis = avis;
+        const editeur: IEditeur = { id: 69104 };
+        jeu.editeur = editeur;
 
         activatedRoute.data = of({ jeu });
         comp.ngOnInit();
 
         expect(comp.editForm.value).toEqual(expect.objectContaining(jeu));
-        expect(comp.avisSharedCollection).toContain(avis);
+        expect(comp.editeursSharedCollection).toContain(editeur);
       });
     });
 
@@ -137,10 +137,10 @@ describe('Component Tests', () => {
     });
 
     describe('Tracking relationships identifiers', () => {
-      describe('trackAvisById', () => {
-        it('Should return tracked Avis primary key', () => {
+      describe('trackEditeurById', () => {
+        it('Should return tracked Editeur primary key', () => {
           const entity = { id: 123 };
-          const trackResult = comp.trackAvisById(0, entity);
+          const trackResult = comp.trackEditeurById(0, entity);
           expect(trackResult).toEqual(entity.id);
         });
       });

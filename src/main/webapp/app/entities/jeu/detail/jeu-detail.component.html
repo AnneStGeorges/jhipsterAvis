@@ -26,10 +26,10 @@
         <dd>
           <span>{{ jeu.dateSortie | formatMediumDatetime }}</span>
         </dd>
-        <dt><span jhiTranslate="jhipsterAvisApp.jeu.avis">Avis</span></dt>
+        <dt><span jhiTranslate="jhipsterAvisApp.jeu.editeur">Editeur</span></dt>
         <dd>
-          <div *ngIf="jeu.avis">
-            <a [routerLink]="['/avis', jeu.avis?.id, 'view']">{{ jeu.avis?.id }}</a>
+          <div *ngIf="jeu.editeur">
+            <a [routerLink]="['/editeur', jeu.editeur?.id, 'view']">{{ jeu.editeur?.id }}</a>
           </div>
         </dd>
       </dl>

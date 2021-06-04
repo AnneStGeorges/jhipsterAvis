@@ -2,6 +2,8 @@ package fr.hb.avis.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -23,9 +25,10 @@ public class Editeur implements Serializable {
     @Column(name = "nom")
     private String nom;
 
-    @ManyToOne
-    @JsonIgnoreProperties(value = { "editeurs", "avis" }, allowSetters = true)
-    private Jeu jeu;
+    @OneToMany(mappedBy = "editeur")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "avis", "editeur" }, allowSetters = true)
+    private Set<Jeu> jeus = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -54,17 +57,35 @@ public class Editeur implements Serializable {
         this.nom = nom;
     }
 
-    public Jeu getJeu() {
-        return this.jeu;
+    public Set<Jeu> getJeus() {
+        return this.jeus;
     }
 
-    public Editeur jeu(Jeu jeu) {
-        this.setJeu(jeu);
+    public Editeur jeus(Set<Jeu> jeus) {
+        this.setJeus(jeus);
         return this;
     }
 
-    public void setJeu(Jeu jeu) {
-        this.jeu = jeu;
+    public Editeur addJeu(Jeu jeu) {
+        this.jeus.add(jeu);
+        jeu.setEditeur(this);
+        return this;
+    }
+
+    public Editeur removeJeu(Jeu jeu) {
+        this.jeus.remove(jeu);
+        jeu.setEditeur(null);
+        return this;
+    }
+
+    public void setJeus(Set<Jeu> jeus) {
+        if (this.jeus != null) {
+            this.jeus.forEach(i -> i.setEditeur(null));
+        }
+        if (jeus != null) {
+            jeus.forEach(i -> i.setEditeur(this));
+        }
+        this.jeus = jeus;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

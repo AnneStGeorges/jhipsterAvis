@@ -30,12 +30,6 @@
         <dd>
           <span>{{ joueur.estAdministrateur }}</span>
         </dd>
-        <dt><span jhiTranslate="jhipsterAvisApp.joueur.avis">Avis</span></dt>
-        <dd>
-          <div *ngIf="joueur.avis">
-            <a [routerLink]="['/avis', joueur.avis?.id, 'view']">{{ joueur.avis?.id }}</a>
-          </div>
-        </dd>
       </dl>
 
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">

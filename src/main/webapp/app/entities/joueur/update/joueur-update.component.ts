@@ -3,15 +3,13 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { finalize, map } from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 
 import * as dayjs from 'dayjs';
 import { DATE_TIME_FORMAT } from 'app/config/input.constants';
 
 import { IJoueur, Joueur } from '../joueur.model';
 import { JoueurService } from '../service/joueur.service';
-import { IAvis } from 'app/entities/avis/avis.model';
-import { AvisService } from 'app/entities/avis/service/avis.service';
 
 @Component({
   selector: 'jhi-joueur-update',
@@ -20,23 +18,15 @@ import { AvisService } from 'app/entities/avis/service/avis.service';
 export class JoueurUpdateComponent implements OnInit {
   isSaving = false;
 
-  avisSharedCollection: IAvis[] = [];
-
   editForm = this.fb.group({
     id: [],
     pseudo: [],
     motDePasse: [],
     dateInscription: [],
     estAdministrateur: [],
-    avis: [],
   });
 
-  constructor(
-    protected joueurService: JoueurService,
-    protected avisService: AvisService,
-    protected activatedRoute: ActivatedRoute,
-    protected fb: FormBuilder
-  ) {}
+  constructor(protected joueurService: JoueurService, protected activatedRoute: ActivatedRoute, protected fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ joueur }) => {
@@ -46,8 +36,6 @@ export class JoueurUpdateComponent implements OnInit {
       }
 
       this.updateForm(joueur);
-
-      this.loadRelationshipsOptions();
     });
   }
 
@@ -63,10 +51,6 @@ export class JoueurUpdateComponent implements OnInit {
     } else {
       this.subscribeToSaveResponse(this.joueurService.create(joueur));
     }
-  }
-
-  trackAvisById(index: number, item: IAvis): number {
-    return item.id!;
   }
 
   protected subscribeToSaveResponse(result: Observable<HttpResponse<IJoueur>>): void {
@@ -95,18 +79,7 @@ export class JoueurUpdateComponent implements OnInit {
       motDePasse: joueur.motDePasse,
       dateInscription: joueur.dateInscription ? joueur.dateInscription.format(DATE_TIME_FORMAT) : null,
       estAdministrateur: joueur.estAdministrateur,
-      avis: joueur.avis,
     });
-
-    this.avisSharedCollection = this.avisService.addAvisToCollectionIfMissing(this.avisSharedCollection, joueur.avis);
-  }
-
-  protected loadRelationshipsOptions(): void {
-    this.avisService
-      .query()
-      .pipe(map((res: HttpResponse<IAvis[]>) => res.body ?? []))
-      .pipe(map((avis: IAvis[]) => this.avisService.addAvisToCollectionIfMissing(avis, this.editForm.get('avis')!.value)))
-      .subscribe((avis: IAvis[]) => (this.avisSharedCollection = avis));
   }
 
   protected createFromForm(): IJoueur {
@@ -119,7 +92,6 @@ export class JoueurUpdateComponent implements OnInit {
         ? dayjs(this.editForm.get(['dateInscription'])!.value, DATE_TIME_FORMAT)
         : undefined,
       estAdministrateur: this.editForm.get(['estAdministrateur'])!.value,
-      avis: this.editForm.get(['avis'])!.value,
     };
   }
 }

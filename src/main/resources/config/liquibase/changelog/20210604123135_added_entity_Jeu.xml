@@ -23,7 +23,7 @@
             <column name="date_sortie" type="${datetimeType}">
                 <constraints nullable="true" />
             </column>
-            <column name="avis_id" type="bigint">
+            <column name="editeur_id" type="bigint">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
