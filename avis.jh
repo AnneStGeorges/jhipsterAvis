@@ -28,15 +28,15 @@ estAdministrateur Boolean
 }
 
 relationship OneToMany {
-Avis to Joueur{avis}
+Joueur{avis} to Avis
 }
 
 
 relationship OneToMany {
-Avis to Jeu{avis}
+Jeu{avis} to Avis
 }
 
  
  relationship OneToMany {
- Jeu to Editeur{jeu}
+Editeur{jeu} to Jeu
  }
