@@ -1,0 +1,25 @@
+{
+  "jhipsterAvisApp": {
+    "editeur": {
+      "home": {
+        "title": "Editeurs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "创建新 Editeur",
+        "createOrEditLabel": "创建或编辑 Editeur",
+        "notFound": "No Editeurs found"
+      },
+      "created": "Editeur {{ param }} 创建成功",
+      "updated": "Editeur {{ param }} 更新成功",
+      "deleted": "Editeur {{ param }} 删除成功",
+      "delete": {
+        "question": "你确定要删除 Editeur {{ id }} 吗？"
+      },
+      "detail": {
+        "title": "Editeur"
+      },
+      "id": "Id",
+      "nom": "Nom",
+      "jeu": "Jeu"
+    }
+  }
+}

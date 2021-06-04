@@ -48,6 +48,13 @@ public class CacheConfiguration {
             createCache(cm, fr.hb.avis.domain.User.class.getName());
             createCache(cm, fr.hb.avis.domain.Authority.class.getName());
             createCache(cm, fr.hb.avis.domain.User.class.getName() + ".authorities");
+            createCache(cm, fr.hb.avis.domain.Jeu.class.getName());
+            createCache(cm, fr.hb.avis.domain.Jeu.class.getName() + ".editeurs");
+            createCache(cm, fr.hb.avis.domain.Editeur.class.getName());
+            createCache(cm, fr.hb.avis.domain.Avis.class.getName());
+            createCache(cm, fr.hb.avis.domain.Avis.class.getName() + ".joueurs");
+            createCache(cm, fr.hb.avis.domain.Avis.class.getName() + ".jeus");
+            createCache(cm, fr.hb.avis.domain.Joueur.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }
